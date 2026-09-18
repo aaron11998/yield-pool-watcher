@@ -1,0 +1,26 @@
+name = "yield-pool-watcher"
+main = "src/index.ts"
+compatibility_date = "2025-05-05"
+compatibility_flags = ["nodejs_compat"]
+
+# ---- Cron: spec — 10-minute polling. */10 gives the spec-mandated cadence.
+[triggers]
+crons = ["*/10 * * * *"]
+
+# KV binding. The namespace id is healed at deploy time by scripts/deploy.sh
+# (temporary CF account rotates ~hourly; each new account mints a fresh
+# namespace id). A stale id fails CLOSED at deploy, never at request time.
+[[kv_namespaces]]
+binding = "YIELD_KV"
+id = "1eeea9a8c3d94884a975484190d90fc5"
+
+[vars]
+# PUBLIC x402 settlement address — config, not a secret (same as sibling workers).
+ORG_EVM_PAYTO = "0x76EfB727cd3271C7DE22f92437Be212766C9631f"
+X402_NETWORK = "eip155:8453"
+X402_ASSET = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+X402_PRICE = "$0.01"
+DATA_SOURCE_URL = "https://yields.llama.fi/pools"
+
+[observability]
+enabled = true

@@ -1,0 +1,6 @@
+node_modules/
+coverage/
+debug_*.cjs
+test_derive*.cjs
+fetch_llama.cjs
+*.log
