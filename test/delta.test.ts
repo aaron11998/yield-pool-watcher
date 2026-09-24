@@ -48,6 +48,8 @@ describe("delta", () => {
     ]);
     const deltas = computeAllDeltas(current, previous);
     expect(deltas.length).toBe(1);
-    expect(deltas[0].pool_id).toBe("0x1111111111111111111111111111111111111111");
+    const delta = deltas[0];
+    expect(delta).toBeDefined();
+    expect(delta!.pool_id).toBe("0x1111111111111111111111111111111111111111");
   });
 });

@@ -1,5 +1,5 @@
 /** Llama data adapter tests (DefiLlama yields API). */
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect, vi, beforeEach } from "vitest";
 import {
   fetchLlamaPools,
   isUsableRow,
@@ -67,8 +67,8 @@ describe("llama", () => {
     ];
     const top = topRows(rows, "aave-v3", 2);
     expect(top.length).toBe(2);
-    expect(top[0].tvlUsd).toBe(10000);
-    expect(top[1].tvlUsd).toBe(1000);
+    expect(top[0]?.tvlUsd).toBe(10000);
+    expect(top[1]?.tvlUsd).toBe(1000);
   });
 
   it("checksumAddress produces valid EIP-55", () => {
