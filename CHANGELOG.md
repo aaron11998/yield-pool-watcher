@@ -5,6 +5,17 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] — 2026-09-24 (GST-24 recovery release)
+
+### Changed
+
+- `wrangler.toml`: cron trigger commented out — Workers free accounts allow 0
+  cron triggers, and a configured cron fails wrangler's trigger step, which
+  leaves the `*.workers.dev` route unenabled after deploy. The paid API is
+  pull-based; re-add `[triggers]` when deploying to a paid account.
+- KV namespace id marked as deploy-time-healed (rotates with the temporary
+  deploy account; a stale id fails CLOSED at deploy, never at request time).
+
 ## [Unreleased]
 
 ### Added

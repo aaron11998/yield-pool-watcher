@@ -4,15 +4,19 @@ compatibility_date = "2025-05-05"
 compatibility_flags = ["nodejs_compat"]
 
 # ---- Cron: spec — 10-minute polling. */10 gives the spec-mandated cadence.
-[triggers]
-crons = ["*/10 * * * *"]
+# NOTE (GST-24 recovery): cron triggers are commented for workers.dev free-tier
+# redeploys (free accounts allow 0 cron triggers; a configured cron fails the
+# trigger step and leaves the workers.dev route unenabled). The paid API is
+# pull-based; re-add [triggers] on a paid account.
+# [triggers]
+# crons = ["*/10 * * * *"]
 
 # KV binding. The namespace id is healed at deploy time by scripts/deploy.sh
 # (temporary CF account rotates ~hourly; each new account mints a fresh
 # namespace id). A stale id fails CLOSED at deploy, never at request time.
 [[kv_namespaces]]
 binding = "YIELD_KV"
-id = "1eeea9a8c3d94884a975484190d90fc5"
+id = "4869e7b7c7344b2fb14373483eecf6c8" # temp-account namespace, healed at deploy (see scripts note)
 
 [vars]
 # PUBLIC x402 settlement address — config, not a secret (same as sibling workers).
