@@ -17,6 +17,12 @@ export interface Env {
   X402_PRICE: string;
   /** DefiLlama yields endpoint (spec's hosted-Graph endpoints were sunset; see README). */
   DATA_SOURCE_URL: string;
+  /** The Graph gateway endpoint for Aave V3 subgraph (optional override). */
+  AAVE_SUBGRAPH_URL?: string;
+  /** The Graph gateway endpoint for Uniswap V3 subgraph (optional override). */
+  UNISWAP_SUBGRAPH_URL?: string;
+  /** The Graph gateway API key for authenticated requests (optional). */
+  GRAPH_API_KEY?: string;
   /** Alert threshold overrides (optional, defaults in code). */
   APY_CHANGE_BPS?: string;
   TVL_CHANGE_PCT?: string;

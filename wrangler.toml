@@ -2,6 +2,10 @@ name = "yield-pool-watcher"
 main = "src/index.ts"
 compatibility_date = "2025-05-05"
 compatibility_flags = ["nodejs_compat"]
+# GST-24: explicit workers.dev route flag. Deployed workers MUST also export a
+# default fetch handler — a script with only named exports (no `export default`)
+# serves CF's "nothing here yet" page on every route even with this flag set.
+workers_dev = true
 
 # ---- Cron: spec — 10-minute polling. */10 gives the spec-mandated cadence.
 # NOTE (GST-24 recovery): cron triggers are commented for workers.dev free-tier
@@ -16,7 +20,7 @@ compatibility_flags = ["nodejs_compat"]
 # namespace id). A stale id fails CLOSED at deploy, never at request time.
 [[kv_namespaces]]
 binding = "YIELD_KV"
-id = "4869e7b7c7344b2fb14373483eecf6c8" # temp-account namespace, healed at deploy (see scripts note)
+id = "0cac6ce8a9f7451497ebe0620f1bd877" # temp-account namespace, healed at deploy (see scripts note)
 
 [vars]
 # PUBLIC x402 settlement address — config, not a secret (same as sibling workers).

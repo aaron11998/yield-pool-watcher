@@ -175,6 +175,12 @@ export interface Env {
   X402_PRICE: string;
   /** Data source endpoint (DefiLlama yields; see llama adapter). */
   DATA_SOURCE_URL: string;
+  /** The Graph gateway endpoint for Aave V3 subgraph (optional override). */
+  AAVE_SUBGRAPH_URL?: string;
+  /** The Graph gateway endpoint for Uniswap V3 subgraph (optional override). */
+  UNISWAP_SUBGRAPH_URL?: string;
+  /** The Graph gateway API key for authenticated requests (optional). */
+  GRAPH_API_KEY?: string;
   /** Threshold overrides, parsed via parseThresholdRules. */
   APY_CHANGE_BPS?: string;
   TVL_CHANGE_PCT?: string;
