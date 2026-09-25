@@ -15,6 +15,8 @@ export default defineConfig({
         "src/alerts.ts",
         "src/llama.ts",
         "src/kv.ts",
+        "src/subgraph.ts",
+        "src/foundation/*.ts",
       ],
     },
   },
