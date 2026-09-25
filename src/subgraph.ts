@@ -134,6 +134,9 @@ export async function fetchSubgraph<T>(
         throw new SubgraphQueryError(endpoint, res.status, bodyText.slice(0, 200) || res.statusText);
       }
       const body = (await res.json()) as SubgraphResponse<T>;
+      // Payload validation happens OUTSIDE the retry path: a deterministic
+      // bad payload (bad query, indexing error, missing data) will not heal
+      // in 500ms, so it fails immediately instead of burning the budget.
       if (body.errors?.length) {
         throw new SubgraphQueryError(endpoint, res.status, body.errors.map((e) => e.message).join("; "));
       }
@@ -142,6 +145,9 @@ export async function fetchSubgraph<T>(
       }
       return body.data;
     } catch (err) {
+      // A 2xx SubgraphQueryError is a validated-payload failure: deterministic,
+      // so rethrow immediately. Transport/HTTP errors keep the retry budget.
+      if (err instanceof SubgraphQueryError && err.status >= 200 && err.status < 300) throw err;
       lastErr = err;
     }
   }
