@@ -50,6 +50,29 @@ app.get("/health", (c) =>
   })
 );
 
+// GST-25 discovery parity: same manifest shape as perps-funding-pulse /
+// lending-liquidation-sentinel so all three x402 services advertise identically.
+app.get("/.well-known/x402.json", (c) =>
+  c.json({
+    x402Version: 2,
+    resource: "/snapshot",
+    description:
+      "Yield pool watcher: top-100 Aave V3 + Uniswap V3 snapshots + deltas",
+    accepts: [
+      {
+        scheme: "exact",
+        network: X402_NETWORK,
+        asset: USDC_BASE,
+        payTo: c.env.ORG_EVM_PAYTO,
+        maxAmountRequired: "10000",
+        resource: "/snapshot",
+        description: "One /snapshot API call",
+      },
+    ],
+    free: ["/health", "/.well-known/x402.json"],
+  })
+);
+
 app.get("/alerts", async (c) => {
   const limit = Math.min(Number(c.req.query("limit") ?? 100), 200);
   const since = c.req.query("since")
