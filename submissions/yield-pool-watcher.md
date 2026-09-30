@@ -34,7 +34,7 @@
 
 ## Live Link
 
-**Deployment URL:** https://yield-pool-watcher.southern-carver.workers.dev
+**Deployment URL:** https://yield-pool-watcher.near-rosemary.workers.dev
 
 ### Endpoints
 - `GET /health` — Free health check (status, pools monitored, last cron, 24h alert count)
@@ -44,13 +44,13 @@
 ### Live Verification
 ```bash
 # Health check (free)
-curl https://yield-pool-watcher.southern-carver.workers.dev/health
+curl https://yield-pool-watcher.near-rosemary.workers.dev/health
 
 # Alert history (free)
-curl https://yield-pool-watcher.southern-carver.workers.dev/alerts
+curl https://yield-pool-watcher.near-rosemary.workers.dev/alerts
 
 # Paid snapshot (requires x402 payment)
-curl -X POST https://yield-pool-watcher.southern-carver.workers.dev/snapshot \
+curl -X POST https://yield-pool-watcher.near-rosemary.workers.dev/snapshot \
   -H "Content-Type: application/json" \
   -d '{}'
 # Returns HTTP 402 with payment requirements (Base USDC, $0.01, payTo 0x76EfB727cd3271C7DE22f92437Be212766C9631f)
@@ -70,7 +70,7 @@ curl -X POST https://yield-pool-watcher.southern-carver.workers.dev/snapshot \
 
 ## Other Resources
 
-- **Repository:** https://github.com/altaranexus-ship-it/yield-pool-watcher
+- **Repository:** https://github.com/aaron11998/yield-pool-watcher
 - **Spec:** Issue #306 (Yield Pool Watcher - Implementation Spec)
 - **Same sponsor** as PRs #341 (Perps Funding Pulse) and #342 (Lending Liquidation Sentinel)
 - **Stack**: CF Workers TS + x402-hono + DefiLlama yields API
@@ -102,3 +102,5 @@ curl -X POST https://yield-pool-watcher.southern-carver.workers.dev/snapshot \
 - Environment variables configured in wrangler.toml
 - No secrets required (x402 payTo is public config)
 - Deploy to any Cloudflare account in <1 min: `npx wrangler deploy`
+
+> **Re-submission note:** this service was originally submitted on 2026-09-18 as PR #343 from the `altaranexus-ship-it` account. That GitHub account has since been suspended, which hid #343 from the repo. Re-filed here from `aaron11998` — same reviewed code (release commit `19ec0f7`), now redeployed on a **permanent** Cloudflare account (Near Rosemary). Fresh verification 2026-10-01 confirms all endpoints healthy and x402 discovery manifest live at `/.well-known/x402.json`.
