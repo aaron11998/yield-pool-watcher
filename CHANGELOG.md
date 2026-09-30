@@ -5,10 +5,17 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.1] — 2026-10-01 (GST-25 discovery parity)
+
+### Added
+- `/.well-known/x402.json` manifest endpoint — x402 discovery parity with
+  `perps-funding-pulse` and `lending-liquidation-sentinel`. All three services
+  now advertise identical manifest shape (x402Version, resource, description,
+  accepts exact/eip155:8453/Base USDC/$0.01/call, payTo 0x76EfB727cd3271C7DE22f92437Be212766C9631f).
+
 ## [1.1.0] — 2026-09-24 (GST-24 recovery release)
 
 ### Changed
-
 - `wrangler.toml`: cron trigger commented out — Workers free accounts allow 0
   cron triggers, and a configured cron fails wrangler's trigger step, which
   leaves the `*.workers.dev` route unenabled after deploy. The paid API is
@@ -19,7 +26,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-
 - **Foundation module** (`src/foundation/`) — zero-dependency shared layer for the
   watcher pipeline (AGEA-52 / bounty chain #307):
   - `types.ts`: shared domain types — `PoolSnapshot`, `PoolMetrics`, `PoolDelta`,
